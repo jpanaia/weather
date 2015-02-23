@@ -20,27 +20,33 @@
 h1 {
 	color: #fff;
 }
+ 
+ h1 + p {
+ 	color: #fff;
+ 	font-size: 16px;
+ }
 
 h2 {
 	text-align:center;
 	letter-spacing:4px;
 	margin-bottom: 25px;
 	font-family: 'Ultra', serif;
-	color: #252B82;
+	color: #253F6E;
 }
 
 h3 {
 	margin-top: 0;
     font-weight:bold;
-    font-size: 20px;
+    font-size: 36px;
+	margin-bottom: 25px;
 }
 
 body {
-	background: url(<%= asset_path 'pdx-bg.jpg' %>) no-repeat center center fixed;
+	background: url(<%= asset_path 'pdx-bg.jpg' %>) no-repeat top left;
 	background-size: cover;
 	font-family: 'Slabo 13px', serif;
-	vertical-align:center;
-	height: 500px;
+	height: 100%;
+	margin-top:20px;
 }
 
 
@@ -49,6 +55,10 @@ body {
 	border-radius: 10px;
 	border:0;
 	margin-bottom: -10px;
+}
+
+.small {
+	font-size: 12px;
 }
 
 
