@@ -1,0 +1,88 @@
+<h1>Weather or not you care...</h1>
+<%#= @w_api.hourly_and_forecast_for("OR","Portland") %>
+
+<!-- <p>It is <%#= @weather_lookup.temperature %> degrees in Portland, OR!
+<%#= image_tag @weather_lookup.icon %></p>
+
+<p>Today: <%#= @weather_lookup.today_text %></p>
+<p>Tonight: <%#= @weather_lookup.tonight_text %></p> -->
+
+<%#= form_tag(root_path) do %>
+  <%#= text_field_tag :city, "", placeholder: "Enter city" %>
+  <%#= text_field_tag :state, "", placeholder: "Enter state" %>
+  <%#= submit_tag "Get My Weather!" %>
+<%# end %>
+
+<%#= @weather_lookups.temperature %>
+<%#= @weather_lookups.city %>
+<%#= @weather_lookups.state %>
+<%#= @weather_lookups.icon %>
+<%#= @weather_lookups.today_text %>
+<%#= @weather_lookups.tonight_text %>
+
+<!-- <%# @weather_lookups.each do |wl| %>
+   <p>It is <%#= wl.temperature %> degrees in <%#= wl.city %>, <%#= wl.state %></p> 
+<%# end %>
+ -->
+
+<!-- <%#= @weather_lookup.temperature %> -->
+
+ <div class="row">
+	<div class="col-md-4">
+		<div class="well pdx">
+			<h2>Portland</h2>
+	
+			<% 2.times do |i| %>
+			
+			<div class="row">
+				<div class="col-xs-3">
+					
+			 		<img src='<%=@w_api.forecast_for("OR","Portland")["forecast"]["txt_forecast"]["forecastday"][i]["icon_url"]%>'>
+				</div>
+				<div class="col-xs-9">
+					<h3><%= @w_api.forecast_for("OR","Portland")["forecast"]["txt_forecast"]["forecastday"][i]["title"] %></h3>
+					<p><%= @w_api.forecast_for("OR","Portland")["forecast"]["txt_forecast"]["forecastday"][i]["fcttext"] %></p>
+				</div>
+			 </div>
+
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="well atl">
+			<h2>Atlanta</h2>
+		
+			<% 2.times do |i| %>
+				
+			<div class="row">
+				<div class="col-xs-3">
+					<img src='<%=@w_api.forecast_for("GA","Atlanta")["forecast"]["txt_forecast"]["forecastday"][i]["icon_url"]%>'>
+				</div>
+				<div class="col-xs-9">
+					<h3><%= @w_api.forecast_for("GA","Atlanta")["forecast"]["txt_forecast"]["forecastday"][i]["title"] %></h3>	
+			 		<p><%= @w_api.forecast_for("GA","Atlanta")["forecast"]["txt_forecast"]["forecastday"][i]["fcttext"] %></p>
+			 	</div>
+			 </div>
+			<% end %>
+	    </div>
+	</div>
+	<div class="col-md-4">
+		<div class="well wdc">
+			<h2>DC</h2>
+			<% 2.times do |i| %>
+				
+				<div class="row">
+					<div class="col-xs-3">
+						<img src='<%=@w_api.forecast_for("DC","Washington")["forecast"]["txt_forecast"]["forecastday"][i]["icon_url"]%>'>
+					</div>
+					<div class="col-xs-9">
+						<h3><%= @w_api.forecast_for("DC","Washington")["forecast"]["txt_forecast"]["forecastday"][i]["title"] %></h3>
+						<p><%= @w_api.forecast_for("DC","Washington")["forecast"]["txt_forecast"]["forecastday"][i]["fcttext"] %></p>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+
