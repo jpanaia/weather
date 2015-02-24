@@ -8,23 +8,38 @@
 <p>Tonight: <%#= @weather_lookup.tonight_text %></p> -->
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-2">
 		<h1>Portland vs...</h1>
 		<p>Any US city vs Portland.</p>
-			 <%= form_tag(root_path()) do %>
-		  <div class="form-group">
-		    <%= text_field_tag :city, "", placeholder: "Enter city", class: "form-control input-lg" %>
-		  </div>
-		  <div class="form-group">
-		  <%= text_field_tag :state, "", placeholder: "Enter state", class: "form-control input-lg" %>
-		  </div>
-
-		  <%= submit_tag "Challenge Accepted!", class: "btn btn-lg btn-primary" %>
+			<%= form_tag(root_path()) do %>
+			  <% if @city == nil %>
+		      <div class="form-group">
+		        <%= text_field_tag :city, "", placeholder: "Enter city", class: "form-control" %>
+		      </div>
+				  <div class="form-group">
+				    <%= text_field_tag :state, "", placeholder: "Enter state", class: "form-control" %>
+				  </div>
+				  <%= submit_tag "Challenge Accepted!", class: "btn btn-primary" %>
+				<% elsif @city2 == nil %>
+				  <div class="form-group">
+				    <%= text_field_tag :city2, "", placeholder: "Enter city 2", class: "form-control" %>
+				  </div>
+				  <div class="form-group">
+				    <%= text_field_tag :state2, "", placeholder: "Enter state 2", class: "form-control" %>
+				  </div>
+				  <div style="display:none">
+             <%= text_field_tag :city, "", value: @city %>
+             <%= text_field_tag :state, "", value: @state %>
+				  </div>
+				  <%= submit_tag "Challenge Accepted!", class: "btn btn-primary" %>
+				<% else %>
+				   <%= link_to "Reset", reset_path, class: "btn btn-primary" %>
+				<% end %>
 		<% end %>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-10">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="well pdx">
 		      <h2><%= @weather_lookup1.city.titleize %>, <%= @weather_lookup1.state.upcase %></h2>
 			    <div class="row">
@@ -43,145 +58,48 @@
 	  		  </div>  
 			  </div>
 			</div>
-
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<% if params[:city] != nil %>
 				  <div class="well pdx">
 				  	<h2><%= @city.titleize %>, <%= @state.upcase %></h2>
 				  	<div class="row">
 					  	<div class="col-xs-3">
-						  <br/>
-				 		  <%= image_tag @weather_lookup2.icon %>
-					  </div>
-					  <div class="col-xs-9">
-						  <span class="small">Currently:</span>
-					  	<h3><%=@weather_lookup2.temperature %> &deg;F</h3>
-					  	<h4>Today:</h4>
-						  <p> <%= @weather_lookup2.today_text %></p>
-						  <h4>Tonight:</h4>
-						  <p><%= @weather_lookup2.tonight_text %></p>
-					  </div>
+						    <br/>
+				 		    <%= image_tag @weather_lookup2.icon %>
+					    </div>
+					    <div class="col-xs-9">
+						    <span class="small">Currently:</span>
+					  	  <h3><%=@weather_lookup2.temperature %> &deg;F</h3>
+					  	  <h4>Today:</h4>
+						    <p> <%= @weather_lookup2.today_text %></p>
+						    <h4>Tonight:</h4>
+						    <p><%= @weather_lookup2.tonight_text %></p>
+					    </div>
+			   	  </div>
 			   	</div>
+			  <% end %>
+			</div>
+			<div class="col-md-4">
+			  <% if params[:city2] != nil %>
+			    <div class="well pdx">
+				    <h2><%= @city2.titleize %>, <%= @state2.upcase %></h2> 
+				  	<div class="row">
+					    <div class="col-xs-3">
+						    <br/>
+				 		    <%= image_tag @weather_lookup3.icon %> 
+					  	</div>
+					    <div class="col-xs-9">
+						    <span class="small">Currently:</span>
+					  	  <h3><%=@weather_lookup3.temperature %> &deg;F</h3> 
+					  	  <h4>Today:</h4>
+						    <p><%= @weather_lookup3.today_text %></p> 
+						    <h4>Tonight:</h4>
+						    <p><%= @weather_lookup3.tonight_text %></p>
+					    </div>
+					  </div>
+					</div>
 			  <% end %>
 			</div>
 		</div>
 	</div>
 </div>
-
-	
-<!-- 
-<div class="row">
-	<div class="col-md-4">
-		<div class="well pdx">
-	
-		</div>
-	</div>
-  <div class="col-md-4">
- 	  <div class="well pdx">
-	    <h2><%= @weather_lookup1.city.titleize %>, <%= @weather_lookup1.state.upcase %></h2>
-		  <div class="row">
-		    <div class="col-xs-3">
-		      <br/>
-		      <%= image_tag @weather_lookup1.icon %>
-		    </div>
-		    <div class="col-xs-9">
-			  	<span class="small">Currently:</span>
-				  <h3><%=@weather_lookup1.temperature %> &deg;F</h3>
-				  <h4>Today:</h4>
-				  <p> <%= @weather_lookup1.today_text %></p>
-				  <h4>Tonight:</h4>
-				  <p><%= @weather_lookup1.tonight_text %></p>
-			  </div>
-		  </div>
-	  </div>  
-	</div> 
-	<div class="col-md-4">
-		<div class="well pdx">
-			<% if params[:city] != nil %>
-			  <h2><%= @city.titleize %>, <%= @state.upcase %></h2>
-			  <div class="row">
-				  <div class="col-xs-3">
-					  <br/>
-			 		  <%= image_tag @weather_lookup2.icon %>
-				  </div>
-				  <div class="col-xs-9">
-					  <span class="small">Currently:</span>
-				  	<h3><%=@weather_lookup2.temperature %> &deg;F</h3>
-				  	<h4>Today:</h4>
-					  <p> <%= @weather_lookup2.today_text %></p>
-					  <h4>Tonight:</h4>
-					  <p><%= @weather_lookup2.tonight_text %></p>
-				  </div>
-			  </div>
-			 <% end %>
-		</div> 
-	</div> 
-
-</div> -->
-
-<!-- <%# @weather_lookups.each do |wl| %>
-   <p>It is <%#= wl.temperature %> degrees in <%#= wl.city %>, <%#= wl.state %></p> 
-<%# end %>
- -->
-
-<!-- <%#= @weather_lookup.temperature %> -->
-
-<!--  <div class="row">
-	<div class="col-md-4">
-		<div class="well pdx">
-			<h2>Portland</h2>
-	
-			<%# 2.times do |i| %>
-			
-			<div class="row">
-				<div class="col-xs-3">
-					
-			 		<img src='<%#=@w_api.forecast_for("OR","Portland")["forecast"]["txt_forecast"]["forecastday"][i]["icon_url"]%>'>
-				</div>
-				<div class="col-xs-9">
-					<h3><%#= @w_api.forecast_for("OR","Portland")["forecast"]["txt_forecast"]["forecastday"][i]["title"] %></h3>
-					<p><%#= @w_api.forecast_for("OR","Portland")["forecast"]["txt_forecast"]["forecastday"][i]["fcttext"] %></p>
-				</div>
-			 </div>
-
-			<%# end %>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="well atl">
-			<h2>Atlanta</h2>
-		
-			<%# 2.times do |i| %>
-				
-			<div class="row">
-				<div class="col-xs-3">
-					<img src='<%#=@w_api.forecast_for("GA","Atlanta")["forecast"]["txt_forecast"]["forecastday"][i]["icon_url"]%>'>
-				</div>
-				<div class="col-xs-9">
-					<h3><%#= @w_api.forecast_for("GA","Atlanta")["forecast"]["txt_forecast"]["forecastday"][i]["title"] %></h3>	
-			 		<p><%#= @w_api.forecast_for("GA","Atlanta")["forecast"]["txt_forecast"]["forecastday"][i]["fcttext"] %></p>
-			 	</div>
-			 </div>
-			<%# end %>
-	    </div>
-	</div>
-	<div class="col-md-4">
-		<div class="well wdc">
-			<h2>DC</h2>
-			<%# 2.times do |i| %>
-				
-				<div class="row">
-					<div class="col-xs-3">
-						<img src='<%#=@w_api.forecast_for("DC","Washington")["forecast"]["txt_forecast"]["forecastday"][i]["icon_url"]%>'>
-					</div>
-					<div class="col-xs-9">
-						<h3><%#= @w_api.forecast_for("DC","Washington")["forecast"]["txt_forecast"]["forecastday"][i]["title"] %></h3>
-						<p><%#= @w_api.forecast_for("DC","Washington")["forecast"]["txt_forecast"]["forecastday"][i]["fcttext"] %></p>
-					</div>
-				</div>
-			<%# end %>
-		</div>
-	</div>
-</div>
- -->
-

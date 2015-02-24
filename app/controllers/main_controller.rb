@@ -11,7 +11,13 @@ class MainController < ApplicationController
   	@weather_lookup1 = WeatherLookup.new("OR","Portland")
   	@state = params[:state]
   	@city = params[:city]
+    @state2 = params[:state2]
+    @city2 = params[:city2]
   	@weather_lookup2 = WeatherLookup.new(params[:state],params[:city])
-  	# @weather_lookup3 = WeatherLookup.new(params[:state],params[:city])
+  	@weather_lookup3 = WeatherLookup.new(params[:state2],params[:city2])
+  end
+
+  def reset
+    redirect_to root_path
   end
 end

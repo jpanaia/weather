@@ -14,8 +14,8 @@ class WeatherLookup
     if state == nil
     	state = "OR"
     end
-    conditions_hash = fetch_conditions(state,city)
-    forecast_hash = fetch_forecast(state,city)
+    conditions_hash = fetch_conditions(state,city.tr(" ", "_"))
+    forecast_hash = fetch_forecast(state,city.tr(" ", "_"))
     assign_conditions(conditions_hash)
     assign_forecast(forecast_hash)
     verify_attributes

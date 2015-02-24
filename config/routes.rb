@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/:city/:state' => "main#index"
   post "/" => "main#index"
+  get '/reset' => "main#reset"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
