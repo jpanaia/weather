@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Portland vs...</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
@@ -14,6 +14,16 @@
 <body>
 
 <div class="container">
+  <h1><%= image_tag 'bird.png', class: "pull-left", width: "70px"%> Portland vs 
+    <% if @city == nil %>
+      ...
+    <% elsif @city2 == nil %>
+      <%= @city.titleize %>
+    <% else %>
+      <%= @city.titleize %> vs <%= @city2.titleize %>
+    <% end %>
+  </h1>
+  <p>Compare the weather of any 2 cities vs Portland's.</p><br clear="all"/>
   <%= yield %>
 </div>
 
